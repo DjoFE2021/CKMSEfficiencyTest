@@ -29,30 +29,6 @@ Here is a basic example of how to use the package:
 print(result)
 ```
 
-## API Reference
-
-### `grs_test(test_assets, factors, lambda_reg=0.1)`
-Runs the GRS test with regularization.
-
-- `test_assets` (numpy.ndarray): Matrix of test asset returns.
-- `factors` (numpy.ndarray): Matrix of factor returns.
-- `lambda_reg` (float, optional): Regularization parameter for covariance estimation.
-- **Returns:** Dictionary with test statistic, p-value, and additional diagnostics.
-
-### `generate_synthetic_data(n_assets, n_obs)`
-Generates synthetic test asset returns for simulation purposes.
-
-- `n_assets` (int): Number of test assets.
-- `n_obs` (int): Number of observations.
-- **Returns:** Simulated asset return matrix.
-
-### `generate_factor_data(n_factors, n_obs)`
-Generates synthetic factor returns.
-
-- `n_factors` (int): Number of factors.
-- `n_obs` (int): Number of observations.
-- **Returns:** Simulated factor return matrix.
-
 ## Citation
 If you use this package in your research, please cite the following paper:
 
