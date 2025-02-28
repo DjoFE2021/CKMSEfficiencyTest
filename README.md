@@ -9,14 +9,14 @@ This Python package provides an implementation of the classical Gibbons-Ross-Sha
 You can install the package using pip:
 
 ```bash
-pip install git+https://github.com/YOUR_GITHUB_USERNAME/GRS-RMT.git
+pip install git+https://github.com/DjoFE2021/CKMSEfficiencyTest.git
 ```
 
 Or clone the repository manually:
 
 ```bash
-git clone https://github.com/YOUR_GITHUB_USERNAME/GRS-RMT.git
-cd GRS-RMT
+git clone https://github.com/DjoFE2021/CKMSEfficiencyTest.git
+cd CKMSEfficiencyTest
 pip install -r requirements.txt
 ```
 
@@ -45,5 +45,5 @@ This package is licensed under the MIT License. See [LICENSE](LICENSE) for detai
 Contributions are welcome! Please open an issue or submit a pull request if you find bugs or have suggestions for improvements.
 
 ## Contact
-For any inquiries, please reach out via [GitHub Issues](https://github.com/YOUR_GITHUB_USERNAME/GRS-RMT/issues) or email [your_email@example.com].
+For any inquiries, please reach out via [GitHub Issues](https://github.com/DjoFE2021/CKMSEfficiencyTest.git/issues) or email [your_email@example.com].
 
