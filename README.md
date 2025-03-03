@@ -17,7 +17,7 @@ Or clone the repository manually:
 ```bash
 git clone https://github.com/DjoFE2021/CKMSEfficiencyTest.git
 cd CKMSEfficiencyTest
-pip install -r requirements.txt
+conda env create -n <YOUR_ENV_NAME> -f environment.yml
 ```
 
 ## Usage
