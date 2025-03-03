@@ -2,11 +2,11 @@
 
 ## Overview
 
-This Python package provides an implementation of the classical Gibbons-Ross-Shanken (GRS) test, as well as its high-dimension counterparts as proposed in Chernov, Kelly, Malamud and Schwab (2025). 
+This Python package provides an implementation of the high-dimensional Gibbons, Ross and Shanken test as proposed in Chernov, Kelly, Malamud and Schwab (2025). 
 
 ## Installation
 
-You can install the package using pip:
+You can download the package using pip:
 
 ```bash
 pip install git+https://github.com/DjoFE2021/CKMSEfficiencyTest.git
@@ -25,8 +25,13 @@ conda env create -n <YOUR_ENV_NAME> -f environment.yml
 Here is a basic example of how to use the package:
 
 ```python
-#INSERT EXAMPLE HERE
-print(result)
+tilde_z_grid = np.array([0.1, 1, 10, 100])
+test = CKMS(z = tilde_z_grid)
+test.test(r = R,
+          r_f = R_f,
+          adjust_grid = True,
+          find_optimal_z = True)
+print(test.summary())
 ```
 
 ## Citation
