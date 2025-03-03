@@ -6,13 +6,7 @@ This Python package provides an implementation of the high-dimensional Gibbons, 
 
 ## Installation
 
-You can download the package using pip:
-
-```bash
-pip install git+https://github.com/DjoFE2021/CKMSEfficiencyTest.git
-```
-
-Or clone the repository manually:
+Clone the repository manually:
 
 ```bash
 git clone https://github.com/DjoFE2021/CKMSEfficiencyTest.git
