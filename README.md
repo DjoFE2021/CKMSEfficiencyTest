@@ -19,10 +19,14 @@ conda env create -n <YOUR_ENV_NAME> -f environment.yml
 Here is a basic example of how to use the package:
 
 ```python
-tilde_z_grid = np.array([0.1, 1, 10, 100])
+import numpy as np
+from tests.CKMS import CKMS
+tilde_z_grid = [0.1, 1, 10, 100]
+R = np.random.normal(0, 1, (100, 1000))
+R_M = np.random.normal(0, 1, (1, 1000))
 test = CKMS(z = tilde_z_grid)
 test.test(r = R,
-          r_f = R_f,
+          r_M = R_M,
           adjust_grid = True,
           find_optimal_z = True)
 print(test.summary())

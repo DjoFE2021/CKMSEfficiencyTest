@@ -1,18 +1,18 @@
 import numpy as np
 
-def simulate_returns(p              : int,
-                     t              : int,
-                     l              : int,
-                     sigma_p_sqrt   : np.ndarray,
-                     mu_f           : np.ndarray,
-                     sigma_f_sqrt   : np.ndarray,
-                     mu_alpha       : float = 0,
-                     beta_bound     : float = 3.0,
-                     omega_alpha    : np.ndarray = None,
-                     target_lambda  : float = None,
-                     sigma_p_inv    : np.ndarray = None
+
+def simulate_returns(p: int,
+                     t: int,
+                     l: int,
+                     sigma_p_sqrt: np.ndarray,
+                     mu_f: np.ndarray,
+                     sigma_f_sqrt: np.ndarray,
+                     mu_alpha: float = 0,
+                     beta_bound: float = 3.0,
+                     omega_alpha: np.ndarray = None,
+                     target_lambda: float = None,
+                     sigma_p_inv: np.ndarray = None
                      ):
-    
     """
     simulate_returns This functions simulates the returns of the stocks as a linear transformation of the factors, up to some noise.
     
@@ -52,50 +52,49 @@ def simulate_returns(p              : int,
     _type_
         _description_
     """
-    
+
     #* Handle some useful cases + some errors check
-    assert not((target_lambda is not None) and (sigma_p_inv is None)), "If you want to match the lambda, you need to provide the inverse of the covariance matrix of the stock returns."
-    
+    assert not ((target_lambda is not None) and (
+                sigma_p_inv is None)), "If you want to match the lambda, you need to provide the inverse of the covariance matrix of the stock returns."
+
     if omega_alpha is None:
         omega_alpha = np.eye(p)
 
-
     #*1 : Simulate the factors
-    r_f = np.random.normal(mu_f,1,size = (l,t))
+    r_f = np.random.normal(mu_f, 1, size=(l, t))
     r_f = sigma_f_sqrt @ r_f
-    
+
     #* 2. Simulate the betas
-    beta = np.random.uniform(-beta_bound, beta_bound, size = (p,l))
-    
+    beta = np.random.uniform(-beta_bound, beta_bound, size=(p, l))
+
     #* 3. Simulate the alphas
-    alpha = omega_alpha@np.random.normal(mu_alpha, 1, size = (p,1))
-    
+    alpha = omega_alpha @ np.random.normal(mu_alpha, 1, size=(p, 1))
+
     #* 4 Match the lambda if required
     scaling = None
     if target_lambda is not None:
-        
+
         if isinstance(mu_f, float):
-            theta_p2 = (mu_f/sigma_f_sqrt)**2
-            
+            theta_p2 = (mu_f / sigma_f_sqrt) ** 2
+
         else:
-            theta_p2 = mu_f.T@np.linalg.inv(sigma_f_sqrt@sigma_f_sqrt)@mu_f
-            
-            
-        lam_hat = (t/(1+theta_p2)*alpha.T@sigma_p_inv@alpha)
-        scaling = np.sqrt(target_lambda/lam_hat)
-        alpha = scaling*alpha
-        
+            theta_p2 = mu_f.T @ np.linalg.inv(sigma_f_sqrt @ sigma_f_sqrt) @ mu_f
+
+        lam_hat = (t / (1 + theta_p2) * alpha.T @ sigma_p_inv @ alpha)
+        scaling = np.sqrt(target_lambda / lam_hat)
+        alpha = scaling * alpha
+
     #* 5. Simulate the stock returns
-    eps = np.random.normal(0,1,size = (p,t))
-    r = alpha + beta@r_f + sigma_p_sqrt@eps
+    eps = np.random.normal(0, 1, size=(p, t))
+    r = alpha + beta @ r_f + sigma_p_sqrt @ eps
 
     return r, r_f, beta, alpha, scaling
-    
+
+
 if __name__ == '__main__':
-    
-    simulate_returns(p = 10,
-                     t = 1000,
-                     l = 3,
-                     sigma_p_sqrt = np.eye(10),
-                     mu_f = np.zeros(3).reshape(-1,1),
-                     sigma_f_sqrt = np.eye(3))
+    simulate_returns(p=10,
+                     t=1000,
+                     l=3,
+                     sigma_p_sqrt=np.eye(10),
+                     mu_f=np.zeros(3).reshape(-1, 1),
+                     sigma_f_sqrt=np.eye(3))
