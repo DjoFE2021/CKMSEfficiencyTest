@@ -15,9 +15,7 @@ conda env create -n <YOUR_ENV_NAME> -f environment.yml
 ```
 
 ## Usage
-
 Here is a basic example of how to use the package:
-
 ```python
 import numpy as np
 from tests.CKMS import CKMS
