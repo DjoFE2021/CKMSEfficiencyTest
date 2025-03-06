@@ -5,8 +5,8 @@ def simulate_returns(p: int,
                      t: int,
                      l: int,
                      sigma_p_sqrt: np.ndarray,
-                     mu_f: np.ndarray,
-                     sigma_f_sqrt: np.ndarray,
+                     mu_M: np.ndarray,
+                     sigma_M_sqrt: np.ndarray,
                      mu_alpha: float = 0,
                      beta_bound: float = 3.0,
                      omega_alpha: np.ndarray = None,
@@ -29,10 +29,10 @@ def simulate_returns(p: int,
         
     sigma_p_sqrt : np.ndarray
     
-    mu_f : np.ndarray
+    mu_M : np.ndarray
         Mean factor returns, of shape (l,1).
         
-    sigma_f_sqrt : np.ndarray
+    sigma_M_sqrt : np.ndarray
         The square root of the covariance matrix of the factor returns, of shape (l,l).
         
     mu_alpha : np.ndarray, default = 0
@@ -61,8 +61,8 @@ def simulate_returns(p: int,
         omega_alpha = np.eye(p)
 
     #*1 : Simulate the factors
-    r_f = np.random.normal(mu_f, 1, size=(l, t))
-    r_f = sigma_f_sqrt @ r_f
+    r_f = np.random.normal(mu_M, 1, size=(l, t))
+    r_f = sigma_M_sqrt @ r_f
 
     #* 2. Simulate the betas
     beta = np.random.uniform(-beta_bound, beta_bound, size=(p, l))
@@ -74,11 +74,11 @@ def simulate_returns(p: int,
     scaling = None
     if target_lambda is not None:
 
-        if isinstance(mu_f, float):
-            theta_p2 = (mu_f / sigma_f_sqrt) ** 2
+        if isinstance(mu_M, float):
+            theta_p2 = (mu_M / sigma_M_sqrt) ** 2
 
         else:
-            theta_p2 = mu_f.T @ np.linalg.inv(sigma_f_sqrt @ sigma_f_sqrt) @ mu_f
+            theta_p2 = mu_M.T @ np.linalg.inv(sigma_M_sqrt @ sigma_M_sqrt) @ mu_M
 
         lam_hat = (t / (1 + theta_p2) * alpha.T @ sigma_p_inv @ alpha)
         scaling = np.sqrt(target_lambda / lam_hat)
@@ -96,5 +96,5 @@ if __name__ == '__main__':
                      t=1000,
                      l=3,
                      sigma_p_sqrt=np.eye(10),
-                     mu_f=np.zeros(3).reshape(-1, 1),
-                     sigma_f_sqrt=np.eye(3))
+                     mu_M=np.zeros(3).reshape(-1, 1),
+                     sigma_M_sqrt=np.eye(3))
